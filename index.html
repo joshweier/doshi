@@ -1,146 +1,166 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>他動詞 vs 自動詞 Quiz</title>
-  <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>他動詞 vs 自動詞 Quiz</title>
+        <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
-      background-color: #f5f5f5;
-      padding: 2rem;
+        font-family: sans-serif;
+        text-align: center;
+        background-color: #f5f5f5;
+        padding: 2rem;
     }
     #verb-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      font-size: 3rem;
-      margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        font-size: 3rem;
+        margin-bottom: 1rem;
     }
     #type-icon-top {
-      width: 40px;
-      height: 40px;
-      margin-left: -0.5rem;
+        width: 40px;
+        height: 40px;
+        margin-left: -0.5rem;
     }
     #image {
-      max-width: 300px;
-      height: auto;
-      margin: 1rem auto;
+        max-width: 100%;
+        height: auto;
+        margin: 1rem auto;
     }
     #answer {
-      font-size: 2rem;
-      margin-top: 1rem;
-      display: none;
+        font-size: 2rem;
+        margin-top: 1rem;
+        display: none;
     }
     .type-icon-inline {
-      width: 24px;
-      height: 24px;
-      /* vertical-align: middle; */
-      margin-left: -0.5rem;
+        width: 24px;
+        height: 24px;
+        /* vertical-align: middle; */
+        margin-left: -0.5rem;
     }
     #next-button {
-      font-size: 1.5rem;
-      padding: 1rem 2rem;
-      margin-top: 2rem;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+        font-size: 1.5rem;
+        padding: 1rem 2rem;
+        margin-top: 2rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
     }
     #next-button:hover {
-      background-color: #0056b3;
+        background-color: #0056b3;
     }
-  </style>
-</head>
-<body>
-  <div id="verb-container">
-    <div id="verb-box">クリックして動詞を表示</div>
-    <img id="type-icon-top" src="media/question.png" alt="">
-  </div>
-  <img id="image" src="" alt="" style="display: none;">
-  <div id="answer"></div>
-  <button id="next-button">Show Answer</button>
+    @media (max-width: 600px) {
+        #next-button {
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+        }
 
-  <script>
-    const verbs = [
-      { jido: "開く", tado: "開ける", base: "開" },
-      { jido: "閉まる", tado: "閉める", base: "閉" },
-      { jido: "入る", tado: "入れる", base: "入" },
-      { jido: "出る", tado: "出す", base: "出" },
-      { jido: "点く", tado: "点ける", base: "点" },
-      { jido: "消える", tado: "消す", base: "消" },
-      { jido: "落ちる", tado: "落とす", base: "落" },
-      { jido: "動く", tado: "動かす", base: "動" },
-      { jido: "壊れる", tado: "壊す", base: "壊" },
-      { jido: "治る", tado: "治す", base: "治" },
-      { jido: "見える", tado: "見る", base: "見" },
-      { jido: "聞こえる", tado: "聞く", base: "聞" },
-      { jido: "届く", tado: "届ける", base: "届" },
-      { jido: "集まる", tado: "集める", base: "集" },
-      { jido: "決まる", tado: "決める", base: "決" },
-      { jido: "始まる", tado: "始める", base: "始" },
-      { jido: "終わる", tado: "終える", base: "終" },
-      { jido: "変わる", tado: "変える", base: "変" },
-      { jido: "止まる", tado: "止める", base: "止" },
-      { jido: "映る", tado: "映す", base: "映" },
-      { jido: "集まる", tado: "集める", base: "集" },
-      { jido: "起きる", tado: "起こす", base: "起" },
-      { jido: "溶ける", tado: "溶かす", base: "溶" },
-      { jido: "下がる", tado: "下げる", base: "下" },
-      { jido: "上がる", tado: "上げる", base: "上" },
-      { jido: "汚れる", tado: "汚す", base: "汚" },
-      { jido: "外れる", tado: "外す", base: "外" }
-    ];
+        .type-icon-inline {
+            width: 20px;
+            height: 20px;
+        }
 
-    let current = {};
-    let showingAnswer = false;
-    let isJidoQuestion = false;
-    const verbBox = document.getElementById("verb-box");
-    const answerBox = document.getElementById("answer");
-    const image = document.getElementById("image");
-    const iconTop = document.getElementById("type-icon-top");
-    const button = document.getElementById("next-button");
-
-    function getRandomVerb() {
-      return verbs[Math.floor(Math.random() * verbs.length)];
+        #type-icon-top {
+            width: 32px;
+            height: 32px;
+        }
+        #next-button {
+            width: 100%;
+        }
     }
+        </style>
+    </head>
+    <body>
+        <div id="verb-container">
+            <div id="verb-box">クリックして動詞を表示</div>
+            <img id="type-icon-top" src="media/question.png" alt="">
+        </div>
+        <img id="image" src="" alt="" style="display: none;">
+        <div id="answer"></div>
+        <button id="next-button">Show Answer</button>
 
-    function showQuestion() {
-      current = getRandomVerb();
-      isJidoQuestion = Math.random() < 0.5;
-      const questionVerb = isJidoQuestion ? current.jido : current.tado;
-      const answerVerb = isJidoQuestion ? current.tado : current.jido;
+        <script>
+            const verbs = [
+                { jido: "開く", tado: "開ける", base: "開" },
+                { jido: "閉まる", tado: "閉める", base: "閉" },
+                { jido: "入る", tado: "入れる", base: "入" },
+                { jido: "出る", tado: "出す", base: "出" },
+                { jido: "点く", tado: "点ける", base: "点" },
+                { jido: "消える", tado: "消す", base: "消" },
+                { jido: "落ちる", tado: "落とす", base: "落" },
+                { jido: "動く", tado: "動かす", base: "動" },
+                { jido: "壊れる", tado: "壊す", base: "壊" },
+                { jido: "治る", tado: "治す", base: "治" },
+                { jido: "見える", tado: "見る", base: "見" },
+                { jido: "聞こえる", tado: "聞く", base: "聞" },
+                { jido: "届く", tado: "届ける", base: "届" },
+                { jido: "集まる", tado: "集める", base: "集" },
+                { jido: "決まる", tado: "決める", base: "決" },
+                { jido: "始まる", tado: "始める", base: "始" },
+                { jido: "終わる", tado: "終える", base: "終" },
+                { jido: "変わる", tado: "変える", base: "変" },
+                { jido: "止まる", tado: "止める", base: "止" },
+                { jido: "映る", tado: "映す", base: "映" },
+                { jido: "集まる", tado: "集める", base: "集" },
+                { jido: "起きる", tado: "起こす", base: "起" },
+                { jido: "溶ける", tado: "溶かす", base: "溶" },
+                { jido: "下がる", tado: "下げる", base: "下" },
+                { jido: "上がる", tado: "上げる", base: "上" },
+                { jido: "汚れる", tado: "汚す", base: "汚" },
+                { jido: "外れる", tado: "外す", base: "外" }
+            ];
 
-      verbBox.textContent = questionVerb;
-      answerBox.innerHTML = `<span>${answerVerb}</span> <img class="type-icon-inline" src="" id="inline-icon" alt="">`;
-      document.getElementById("inline-icon").src = "";
-      answerBox.style.display = "none";
-      iconTop.src = "media/question.png";
-      image.src = `media/${current.base}.png`;
-      image.style.display = "block";
-      showingAnswer = false;
-      button.textContent = "Show Answer";
-    }
+            let current = {};
+            let showingAnswer = false;
+            let isJidoQuestion = false;
+            const verbBox = document.getElementById("verb-box");
+            const answerBox = document.getElementById("answer");
+            const image = document.getElementById("image");
+            const iconTop = document.getElementById("type-icon-top");
+            const button = document.getElementById("next-button");
 
-    button.addEventListener("click", () => {
-      if (!showingAnswer) {
-        const answerIconFile= isJidoQuestion ? "jido.png" : "tado.png" ;
-        const pairIconFile  = isJidoQuestion ? "tado.png" : "jido.png";
-        answerBox.style.display = "block";
-        document.getElementById("inline-icon").src = `media/${pairIconFile}`;
-        iconTop.src = `media/${answerIconFile}`;
-        button.textContent = "Next";
-        showingAnswer = true;
-      } else {
-        showQuestion();
-      }
-    });
+            function getRandomVerb() {
+                return verbs[Math.floor(Math.random() * verbs.length)];
+            }
 
-    // Initialize first question
-    showQuestion();
-  </script>
-</body>
+            function showQuestion() {
+                current = getRandomVerb();
+                isJidoQuestion = Math.random() < 0.5;
+                const questionVerb = isJidoQuestion ? current.jido : current.tado;
+                const answerVerb = isJidoQuestion ? current.tado : current.jido;
+
+                verbBox.textContent = questionVerb;
+                answerBox.innerHTML = `<span>${answerVerb}</span> <img class="type-icon-inline" src="" id="inline-icon" alt="">`;
+                document.getElementById("inline-icon").src = "";
+                answerBox.style.display = "none";
+                iconTop.src = "media/question.png";
+                image.src = `media/${current.base}.png`;
+                image.style.display = "block";
+                showingAnswer = false;
+                button.textContent = "Show Answer";
+            }
+
+            button.addEventListener("click", () => {
+                if (!showingAnswer) {
+                    const answerIconFile= isJidoQuestion ? "jido.png" : "tado.png" ;
+                    const pairIconFile  = isJidoQuestion ? "tado.png" : "jido.png";
+                    answerBox.style.display = "block";
+                    document.getElementById("inline-icon").src = `media/${pairIconFile}`;
+                    iconTop.src = `media/${answerIconFile}`;
+                    button.textContent = "Next";
+                    showingAnswer = true;
+                } else {
+                    showQuestion();
+                }
+            });
+
+            // Initialize first question
+            showQuestion();
+        </script>
+    </body>
 </html>
 
